@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html
+  xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=iso-8859-1" />
+    <title>xANNA certificate authority</title>
+    <style type="text/css">
+body {
+  margin-left: 10%; margin-right: 10%;
+  color: black; background: white;
+}
+
+hr {margin-left: -6%; margin-right: -6%;}
+
+h1 {font-family: Arial,Helvetica,sans-serif; font-size: 40pt; text-align: center; color: #c18808}
+h2 {font-family: Arial,Helvetica,sans-serif; font-size: 16pt; color: #c18808; margin-left: -5%;}
+h3 {font-family: Arial,Helvetica,sans-serif; font-size: 14pt; color: #c18808; margin-left: -3%;}
+h4 {font-family: helvetica; font-size: 14pt; font-variant: small-caps}
+
+pre.src {background: #EEEEEE; padding: 0.5em; border: none;}</style>
+  </head>
+  <body lang="en"> <br />
+    <table style="margin-left: -6%;" border="0">
+      <colgroup><col /> <col /> </colgroup>
+      <tbody>
+        <tr>
+          <td><img alt="Xanna" src="../resources/canna_indica_199284.jpeg" style="float: left"
+              width="230"
+              height="256" /></td>
+          <td style="display: inline; float: left;" width="500">
+            <pre> <b style="color:#692222"><span style="font-family: Arial,Helvetica,sans-serif;font-size: 36pt;color:#c18808">xANNA</span></b>
+ <b><span style="font-family: Arial,Helvetica,sans-serif;font-size: 16pt;color:#4d4d4d">certificate authority</span></b> </pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <hr />
+    <h2 id="CANNA">The xANNA certificate authority</h2>
+    <p>xANNA is a PKI certificate authority, but not so public.  <span style="font-style: italic;">On
+        who's authority did xANNA become a CA?</span>  Answer: xANNA's.</p>
+    <p>The motivating purpose is that sometimes it's useful to set up
+      authentication systems without having to be hooked into the public key
+      infrastructure. This is true even these days where dynamic certificate
+      generation is around.  Examples include private networks, testing, and so
+      on.</p>
+    <p>When others are involved (e.g. open source collaboration or <em>intruders</em>!),
+      having a degree of security is good idea.  So, just copying around
+      credentials soon becomes problematic.  Self-signed cert's just generate
+      more and more work.  Testing when you have to disable security leaves big
+      and dangerous holes in the testing.</p>
+    <p>So, the xANNA CA is a real CA. The xANNA root and intermediate
+      certificates are signed by the xANNA registrar.  We publish signature
+      information <a href="../authentication/index.html">here</a> in the
+      xANNA.  You can also get the certificate from alternate channels.  For
+      example, you can stop by the registrar's desk.</p>
+    <p>The xANNA root CA certificate, the xANNA SSL CA certificate, as well as
+      other certificates issued by xANNA can be found in the <a href="../registry/ca">ca
+        registry</a>.</p>
+    <p></p>
+    <hr />
+    <div style="margin-left: -6%;">
+      <p style="color:#c18808;font-family: Arial,Helvetica,sans-serif"><a href="../index.html"><b>xANNA
+            home</b></a></p>
+      <pre><em>December 25, 2018</em></pre>
+      <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10"
+            alt="Valid XHTML 1.0!"
+            width="88"
+            height="31" /></a>
+      </p>
+    </div>
+  </body>
+</html>

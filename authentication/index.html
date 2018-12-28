@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html
+  xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=iso-8859-1" />
+    <title>xANNA authentication</title>
+    <style type="text/css">
+body {
+  margin-left: 10%; margin-right: 10%;
+  color: black; background: white;
+}
+
+hr {margin-left: -6%; margin-right: -6%;}
+
+h1 {font-family: Arial,Helvetica,sans-serif; font-size: 40pt; text-align: center; color: #c18808}
+h2 {font-family: Arial,Helvetica,sans-serif; font-size: 16pt; color: #c18808; margin-left: -5%;}
+h3 {font-family: Arial,Helvetica,sans-serif; font-size: 14pt; color: #c18808; margin-left: -3%;}
+h4 {font-family: helvetica; font-size: 14pt; font-variant: small-caps}
+
+pre.src {background: #EEEEEE; padding: 0.5em; border: none;}</style>
+  </head>
+  <body lang="en"> <br />
+    <table style="margin-left: -6%;" border="0">
+      <colgroup><col /> <col /> </colgroup>
+      <tbody>
+        <tr>
+          <td><img alt="Canna" src="../resources/canna_speciosa.jpg" style="float: left"
+              width="180"
+              height="256" /></td>
+          <td style="display: inline; float: left;" width="500">
+            <pre> <b style="color:#692222"><span style="font-family: Arial,Helvetica,sans-serif;font-size: 36pt;color:#c18808">xANNA</span></b>
+ <b><span style="font-family: Arial,Helvetica,sans-serif;font-size: 16pt;color:#4d4d4d">authenticity of artifacts published by xANNA</span></b> </pre>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <hr />
+    <h2>integrity of artifacts</h2>
+    <p>Most artifacts published by xANNA in the registry have associated
+      checksums to insure that when downloaded or passed around, nothing has
+      been altered. These checksums are easy to check (see below). Artifacts
+      that already have integrated integrity and authentication information
+      (e.g. PKI certificates) may not be signed directly by the xANNA registrar.</p>
+    <h2>authenticity of artifacts</h2>
+    <p>Artifacts that contain or represent the assignment of a name or number
+      are signed by at least one xANNA registrar. The signature is a promise
+      that the artifact is a proper part of the registry. It conforms to the
+      assignment guidelines and should not be in conflict with other
+      registrations. It has passed through the hands of a registrar.</p>
+    <p>PKI root certificates are signed. Certificates issued from a CA root need
+      only the signing embedded in the certificate chain.</p>
+    <p>The signature is not a guarantee of quality or the absence of errors,
+      although we try our best to insure quality prior to signature.</p>
+    <p>Signed artifacts can not be changed. They can only be superseded by later
+      versions or through deprecation/obsolescence/revocation. This process
+      insures name and number allocations are never reused for some other
+      purpose (which can create confusion and ambiguity).</p>
+    <p>The use of altered copies of signed artifacts means that xANNA can not
+      vouch for the lack of conflicts with other names and numbers.</p>
+    <p>Checking the authenticity of artifacts is more complicated than checking
+      integrity. Note that authenticity checking automatically verifies
+      integrity. The procedure is covered below.</p>
+    <p>Registrar public keys are provided on this repository in the <a href="xANNA_KEYS.txt">xANNA_KEYS</a>
+      file. <em>However, obtaining them directly from here does not provide
+        much security</em>. If you wish to obtain the keys through another
+      channel, please contract the registrar.</p>
+    <h2>the registrars</h2>
+    <dl>
+      <dt><a href="mailto:ranger6rob@gmail.com">Robert Hyerle<br />
+        </a></dt>
+      <dd>
+        <pre>pub  4096R/6A5F408B 2018-12-24            
+uid Robert Hyerle (ranger6) &lt;ranger6rob@gmail.com&gt;
+</pre> </dd>
+    </dl>
+    <h2>software in use</h2>
+    <dl>
+      <dt>authentication and verification</dt>
+      <dd><a href="http://www.gnupg.org/">GNU Privacy Guard</a> (gpg) is the
+        basic tool used. Keys are published in <a href="http://en.wikipedia.org/wiki/Key_server_%28cryptographic%29">OpenPGP
+          keyservers</a>.</dd>
+      <dt>verification</dt>
+      <dd>GNU Privacy Guard, <a href="http://www.gnu.org/software/coreutils/">GNU
+          Core Utils</a> (md5sum, sha1sum), or <a href="http://www.openssl.org/">OpenSSL</a>.
+        Other tools are available for other (including non-Unix) platforms.</dd>
+    </dl>
+    <h2>procedures for verifying and authenticating artifacts</h2>
+    <p>The procedures are modeled after those used by the <a href="http://www.apache.org/">Apache
+        Software Foundation</a>; in particular those used for <a href="http://ant.apache.org/srcdownload.cgi#Verify%20Releases">Ant</a>
+      and <a href="http://ant.apache.org/ivy/download.cgi#VerifyReleases">Ivy</a>.</p>
+    <p>A published artifact (a file) has one or more message digests associated
+      with it. The digest is contained in a file with a name derived from the
+      name of the artifact and the message digest algorithm. These files are
+      normally placed in the same directory.</p>
+    <p>If the file is signed by a xANNA registrar, there will be an associated
+      (detached) signature file with a name composed of the artifact file name
+      and the ".asc" suffix.</p>
+    <p>For example, consider a text file named <code>artifact.txt</code>.  One
+      will find the following files:</p>
+    <pre class="src">$ ls -g
+total 32
+-rw-r--r--  1 staff   44 Dec 25 16:10 artifact.txt
+-rw-r--r--  1 staff  256 Dec 25 17:10 artifact.txt.asc
+-rw-r--r--  1 staff   63 Dec 25 17:04 artifact.txt.md5
+-rw-r--r--  1 staff  100 Dec 25 17:04 artifact.txt.sha256
+$ </pre>
+    <p>One can generate and view the saved message digests manually and compare
+      them:</p>
+    <pre class="src">$ gpg --print-md sha256 artifact.txt
+artifact.txt: C03905FC DAB29751 3A620EC8 1ED46CA4 4DDB62D4 1CBBD83E B4A5A359
+              2BE26A69
+$ cat artifact.txt.sha256 
+artifact.txt: C03905FC DAB29751 3A620EC8 1ED46CA4 4DDB62D4 1CBBD83E B4A5A359
+              2BE26A69
+$</pre>
+    <p>This works in a similar manner for the MD5 digests.</p>
+    <p>To authenticate (check the signature of the registrars), one must first
+      have the registrars' public keys. These keys should be imported (merged)
+      into a public keyring. Then, one can check the signatures. Continuing the
+      example, after obtaining the xANNA registrar keys in a file named <a href="./xANNA_KEYS.txt">xANNA_KEYS.txt</a>,
+      they are imported:</p>
+    <pre class="src">$ gpg --import xANNA_KEYS.txt
+gpg: key 55FB53736A5F408B: "Robert Hyerle (ranger6) () &lt;ranger6rob@gmail.com&gt;" imported
+gpg: Total number processed: 1
+gpg: no ultimately trusted keys found
+$ </pre>
+    <p>The note about "no ultimately trusted keys found" refers to the fact that
+      the imported key is not verified by someone else that you have indicated
+      as trusted. You will see a similar warning below when verifying the
+      artifact. One trusts the xANNA Registrar key because you got it from a
+      trusted source who you believe knows how to handle keys.</p>
+    <p>Now, the xANNA signature on the MIB file can be checked:</p>
+    <pre class="src">$ gpg --verify artifact.txt.asc 
+gpg: assuming signed data in 'artifact.txt'
+gpg: Signature made Tue Dec 25 17:10:46 2018 CET
+gpg:                using DSA key 3EAA2DC11757400AEA2EA7C8CD97C16346FC2C5F
+gpg:                issuer "ranger6rob@gmail.com"
+gpg: Good signature from "Robert Hyerle (ranger6) () &lt;ranger6rob@gmail.com&gt;"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+$ </pre>
+    <hr />
+    <div style="margin-left: -6%;">
+      <p style="color:#c18808;font-family: Arial,Helvetica,sans-serif"><a href="../index.html"><b>xANNA
+            home</b></a></p>
+      <pre><em>December 25, 2087</em></pre>
+      <p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10"
+            alt="Valid XHTML 1.0!"
+            width="88"
+            height="31" /></a>
+        
+      </p>
+    </div>
+  </body>
+</html>
